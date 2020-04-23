@@ -1,37 +1,4 @@
-<script>
-import { authComputed } from '@state/helpers'
-
-export default {
-	props: {
-		user: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
-		isMenuOpened: {
-			type: Boolean,
-			default: false,
-		},
-	},
-	data() {
-		return {}
-	},
-	computed: {
-		...authComputed,
-	},
-	methods: {
-		toggleMenu() {
-			this.$parent.toggleMenu()
-		},
-		toggleRightSidebar() {
-			this.$parent.toggleRightSidebar()
-		},
-	},
-}
-</script>
-
 <template>
-	<!-- Topbar Start -->
 	<div class="navbar navbar-expand flex-md-row navbar-custom">
 		<div class="container-fluid ">
 			<div class="row">
