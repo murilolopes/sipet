@@ -44,7 +44,7 @@
 	</div>
 </template>
 <script>
-import { authComputed } from '@state/helpers'
+import { authComputed } from '@manager-state/helpers'
 
 export default {
 	computed: {

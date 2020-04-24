@@ -176,6 +176,34 @@ const pagesRoutes = [
         return c('router-view')
       },
     },
+    children: [
+      {
+        path: 'starter',
+        name: 'Starter',
+        component: () => lazyLoadView(import('@manager-views/pages/secondary/starter')),
+      },
+      {
+        path: 'invoice',
+        name: 'Invoice',
+        component: () => lazyLoadView(import('@manager-views/pages/secondary/invoice')),
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => lazyLoadView(import('@manager-views/pages/secondary/profile/')),
+      },
+      {
+        path: 'activity',
+        name: 'Activity',
+        component: () =>
+          lazyLoadView(import('@manager-views/pages/secondary/activity')),
+      },
+      {
+        path: 'pricing',
+        name: 'Pricing',
+        component: () => lazyLoadView(import('@manager-views/pages/secondary/pricing')),
+      },
+    ],
   },
 ]
 
