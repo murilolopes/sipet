@@ -32,8 +32,8 @@ pagarme.client.connect({ api_key: 'ak_test_fwVPLNxWd3BnC7yRG8UMYqKYD47NSW' }).th
 Vue.use(BootstrapVue)
 
 Vue.prototype.$api = require('axios')
-Vue.prototype.$api.defaults.baseURL  = 'https://pety-api.herokuapp.com/api/v1'
-// Vue.prototype.$api.defaults.baseURL  = 'http://localhost:3000/api/v1'
+// Vue.prototype.$api.defaults.baseURL  = 'https://pety-api.herokuapp.com/api/v1'
+Vue.prototype.$api.defaults.baseURL  = 'http://localhost:3000/api/v1'
 
 const app = new Vue({
   router,

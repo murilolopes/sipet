@@ -1,5 +1,5 @@
 <script>
-import Layout from '@layouts/main'
+import Layout from '@sales-layouts/main'
 
 export default {
   page: {

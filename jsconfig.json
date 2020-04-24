@@ -14,22 +14,6 @@
         "./index.scss",
         "./index.css"
       ],
-      "@src/*": ["src/*"],
-      "@src": [
-        "src/index.js",
-        "src/index.json",
-        "src/index.vue",
-        "src/index.scss",
-        "src/index.css"
-      ],
-      "@router/*": ["src/router/*"],
-      "@router": [
-        "src/router/index.js",
-        "src/router/index.json",
-        "src/router/index.vue",
-        "src/router/index.scss",
-        "src/router/index.css"
-      ],
       "@views/*": ["src/router/views/*"],
       "@views": [
         "src/router/views/index.js",
@@ -45,14 +29,6 @@
         "src/router/layouts/index.vue",
         "src/router/layouts/index.scss",
         "src/router/layouts/index.css"
-      ],
-      "@routes/*": ["src/router/routes/*"],
-      "@routes": [
-        "src/router/routes/index.js",
-        "src/router/routes/index.json",
-        "src/router/routes/index.vue",
-        "src/router/routes/index.scss",
-        "src/router/routes/index.css"
       ],
       "@components/*": ["src/components/*"],
       "@components": [
@@ -70,6 +46,32 @@
         "src/assets/index.scss",
         "src/assets/index.css"
       ],
+      "@design/*": ["src/design/index.scss/*"],
+      "@design": ["src/design/index.scss"],
+      "@src/*": ["src/*"],
+      "@src": [
+        "src/index.js",
+        "src/index.json",
+        "src/index.vue",
+        "src/index.scss",
+        "src/index.css"
+      ],
+      "@router/*": ["src/router/*"],
+      "@router": [
+        "src/router/index.js",
+        "src/router/index.json",
+        "src/router/index.vue",
+        "src/router/index.scss",
+        "src/router/index.css"
+      ],
+      "@routes/*": ["src/router/routes/*"],
+      "@routes": [
+        "src/router/routes/index.js",
+        "src/router/routes/index.json",
+        "src/router/routes/index.vue",
+        "src/router/routes/index.scss",
+        "src/router/routes/index.css"
+      ],
       "@utils/*": ["src/utils/*"],
       "@utils": [
         "src/utils/index.js",
@@ -86,23 +88,21 @@
         "src/state/index.scss",
         "src/state/index.css"
       ],
-      "@design/*": ["src/design/index.scss/*"],
-      "@design": ["src/design/index.scss"],
-      "@sales/*": ["./src/sales/*"],
+      "@sales/*": ["./*"],
       "@sales": [
-        "./src/sales/index.js",
-        "./src/sales/index.json",
-        "./src/sales/index.vue",
-        "./src/sales/index.scss",
-        "./src/sales/index.css"
+        "./index.js",
+        "./index.json",
+        "./index.vue",
+        "./index.scss",
+        "./index.css"
       ],
-      "@sales-src/*": ["src/sales//*"],
+      "@sales-src/*": ["src/sales/*"],
       "@sales-src": [
-        "src/sales//index.js",
-        "src/sales//index.json",
-        "src/sales//index.vue",
-        "src/sales//index.scss",
-        "src/sales//index.css"
+        "src/sales/index.js",
+        "src/sales/index.json",
+        "src/sales/index.vue",
+        "src/sales/index.scss",
+        "src/sales/index.css"
       ],
       "@sales-router/*": ["src/sales/router/*"],
       "@sales-router": [
@@ -144,16 +144,78 @@
         "src/sales/components/index.scss",
         "src/sales/components/index.css"
       ],
-      "@sales-assets/*": ["src/sales/assets/*"],
-      "@sales-assets": [
-        "src/sales/assets/index.js",
-        "src/sales/assets/index.json",
-        "src/sales/assets/index.vue",
-        "src/sales/assets/index.scss",
-        "src/sales/assets/index.css"
+      "@sales-state/*": ["src/sales/state/*"],
+      "@sales-state": [
+        "src/sales/state/index.js",
+        "src/sales/state/index.json",
+        "src/sales/state/index.vue",
+        "src/sales/state/index.scss",
+        "src/sales/state/index.css"
       ],
-      "@sales-design/*": ["src/sales/design/index.scss/*"],
-      "@sales-design": ["src/sales/design/index.scss"]
+      "@manager/*": ["./*"],
+      "@manager": [
+        "./index.js",
+        "./index.json",
+        "./index.vue",
+        "./index.scss",
+        "./index.css"
+      ],
+      "@manager-src/*": ["src/manager/*"],
+      "@manager-src": [
+        "src/manager/index.js",
+        "src/manager/index.json",
+        "src/manager/index.vue",
+        "src/manager/index.scss",
+        "src/manager/index.css"
+      ],
+      "@manager-router/*": ["src/manager/router/*"],
+      "@manager-router": [
+        "src/manager/router/index.js",
+        "src/manager/router/index.json",
+        "src/manager/router/index.vue",
+        "src/manager/router/index.scss",
+        "src/manager/router/index.css"
+      ],
+      "@manager-views/*": ["src/manager/router/views/*"],
+      "@manager-views": [
+        "src/manager/router/views/index.js",
+        "src/manager/router/views/index.json",
+        "src/manager/router/views/index.vue",
+        "src/manager/router/views/index.scss",
+        "src/manager/router/views/index.css"
+      ],
+      "@manager-layouts/*": ["src/manager/router/layouts/*"],
+      "@manager-layouts": [
+        "src/manager/router/layouts/index.js",
+        "src/manager/router/layouts/index.json",
+        "src/manager/router/layouts/index.vue",
+        "src/manager/router/layouts/index.scss",
+        "src/manager/router/layouts/index.css"
+      ],
+      "@manager-routes/*": ["src/manager/router/routes/*"],
+      "@manager-routes": [
+        "src/manager/router/routes/index.js",
+        "src/manager/router/routes/index.json",
+        "src/manager/router/routes/index.vue",
+        "src/manager/router/routes/index.scss",
+        "src/manager/router/routes/index.css"
+      ],
+      "@manager-components/*": ["src/manager/components/*"],
+      "@manager-components": [
+        "src/manager/components/index.js",
+        "src/manager/components/index.json",
+        "src/manager/components/index.vue",
+        "src/manager/components/index.scss",
+        "src/manager/components/index.css"
+      ],
+      "@manager-state/*": ["src/manager/state/*"],
+      "@manager-state": [
+        "src/manager/state/index.js",
+        "src/manager/state/index.json",
+        "src/manager/state/index.vue",
+        "src/manager/state/index.scss",
+        "src/manager/state/index.css"
+      ]
     }
   }
 }
