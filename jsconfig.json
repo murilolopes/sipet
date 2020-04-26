@@ -112,21 +112,13 @@
         "src/sales/router/index.scss",
         "src/sales/router/index.css"
       ],
-      "@sales-views/*": ["src/sales/router/views/*"],
-      "@sales-views": [
-        "src/sales/router/views/index.js",
-        "src/sales/router/views/index.json",
-        "src/sales/router/views/index.vue",
-        "src/sales/router/views/index.scss",
-        "src/sales/router/views/index.css"
-      ],
-      "@sales-layouts/*": ["src/sales/router/layouts/*"],
-      "@sales-layouts": [
-        "src/sales/router/layouts/index.js",
-        "src/sales/router/layouts/index.json",
-        "src/sales/router/layouts/index.vue",
-        "src/sales/router/layouts/index.scss",
-        "src/sales/router/layouts/index.css"
+      "@sales-pages/*": ["src/sales/pages/*"],
+      "@sales-pages": [
+        "src/sales/pages/index.js",
+        "src/sales/pages/index.json",
+        "src/sales/pages/index.vue",
+        "src/sales/pages/index.scss",
+        "src/sales/pages/index.css"
       ],
       "@sales-routes/*": ["src/sales/router/routes/*"],
       "@sales-routes": [

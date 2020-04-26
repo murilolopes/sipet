@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './app'
 import router from '@sales-router'
-import '@sales-components/_globals'
+import '@components/_globals'
 
 import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'

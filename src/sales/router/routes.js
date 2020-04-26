@@ -1,21 +1,16 @@
-const dashboardRoutes = [
+const allRoutes = [
   {
     path: '/',
-    component: () => lazyLoadView(import('@sales-views/pages/')),
+    component: () => lazyLoadView(import('@sales-pages/')),
   },
 ]
 
-const authProtectedRoutes = [
-  ...dashboardRoutes,
-]
-const allRoutes = [...authProtectedRoutes]
-
-export { allRoutes, authProtectedRoutes }
+export { allRoutes }
 
 function lazyLoadView(AsyncView) {
   const AsyncHandler = () => ({
     component: AsyncView,
-    loading: require('@sales-components/_loading').default,
+    loading: require('@components/_loading').default,
     delay: 400,
     timeout: 10000,
   })

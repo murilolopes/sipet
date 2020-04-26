@@ -221,9 +221,9 @@ export default {
         <b-form-group label-for="pedigree">
           <label> Monte seu plano escolhendo no mínimo 3 tipos de serviços</label>
           <div class="row">
-            <div class="col-2" v-for="cat in categories">
+            <div class="col-2" v-for="(category, index) in categories" :key="index">
               <b-form-group label-for="pedigree" :class="{ 'is-invalid': $v.pet.categories.$error }">
-                <b-form-checkbox v-model="pet.categories" :value="cat.id">{{ cat.name }}</b-form-checkbox>
+                <b-form-checkbox v-model="pet.categories" :value="category.id">{{ category.name }}</b-form-checkbox>
               </b-form-group>
             </div>
           </div>
