@@ -6,6 +6,7 @@
     "dev": "vue-cli-service serve",
     "dev:sales": "vue-cli-service serve src/sales/main.js",
     "dev:manager": "vue-cli-service serve src/manager/main.js",
+    "dev:accreditation": "vue-cli-service serve src/accreditation/main.js",
     "dev:e2e": "cross-env VUE_APP_TEST=e2e vue-cli-service test:e2e --mode=development",
     "build": "vue-cli-service build --modern",
     "build:ci": "yarn build --report",
