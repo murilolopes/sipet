@@ -31,7 +31,6 @@ const aliases = {
   '@sales-components': 'src/sales/components',
   '@sales-state': 'src/sales/state',
   
-  
   '@manager': '.',
   '@manager-src': 'src/manager',
   '@manager-router': 'src/manager/router',
@@ -40,6 +39,15 @@ const aliases = {
   '@manager-routes': 'src/manager/router/routes',
   '@manager-components': 'src/manager/components',
   '@manager-state': 'src/manager/state',
+  
+  '@accreditation': '.',
+  '@accreditation-src': 'src/accreditation',
+  // '@accreditation-router': 'src/accreditation/router',
+  // '@accreditation-views': 'src/accreditation/router/views',
+  // '@accreditation-layouts': 'src/accreditation/router/layouts',
+  // '@accreditation-routes': 'src/accreditation/router/routes',
+  // '@accreditation-components': 'src/accreditation/components',
+  // '@accreditation-state': 'src/accreditation/state',
   
 }
 
