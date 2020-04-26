@@ -5,7 +5,7 @@ const prettier = require('prettier')
 const aliases = {
   '@': '.',
   '@views': 'src/router/views',
-  '@layouts': 'src/router/layouts',
+  '@layouts': 'src/layouts',
   '@components': 'src/components',
   '@assets': 'src/assets',
   '@design': 'src/design/index.scss',
@@ -14,7 +14,6 @@ const aliases = {
   '@src': 'src',
   '@router': 'src/router',
   '@views': 'src/router/views',
-  '@layouts': 'src/router/layouts',
   '@routes': 'src/router/routes',
   '@components': 'src/components',
   '@assets': 'src/assets',
@@ -43,11 +42,11 @@ const aliases = {
   '@accreditation': '.',
   '@accreditation-src': 'src/accreditation',
   '@accreditation-pages': 'src/accreditation/pages',
-  // '@accreditation-router': 'src/accreditation/router',
+  '@accreditation-router': 'src/accreditation/router',
+  '@accreditation-components': 'src/accreditation/components',
   // '@accreditation-views': 'src/accreditation/router/views',
   // '@accreditation-layouts': 'src/accreditation/router/layouts',
   // '@accreditation-routes': 'src/accreditation/router/routes',
-  // '@accreditation-components': 'src/accreditation/components',
   // '@accreditation-state': 'src/accreditation/state',
   
 }

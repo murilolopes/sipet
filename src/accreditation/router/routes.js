@@ -1,11 +1,11 @@
-const mainRoutes = [
+const allRoutes = [
   {
     path: '/',
     component: () => lazyLoadView(import('@accreditation-pages/')),
   },
 ]
 
-export { mainRoutes }
+export { allRoutes }
 
 function lazyLoadView(AsyncView) {
   const AsyncHandler = () => ({

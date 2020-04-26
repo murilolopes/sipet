@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './app'
-import router from '@sales-router'
-import '@sales-components/_globals'
+import router from '@accreditation-router'
 
 import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'

@@ -22,13 +22,13 @@
         "src/router/views/index.scss",
         "src/router/views/index.css"
       ],
-      "@layouts/*": ["src/router/layouts/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@layouts": [
-        "src/router/layouts/index.js",
-        "src/router/layouts/index.json",
-        "src/router/layouts/index.vue",
-        "src/router/layouts/index.scss",
-        "src/router/layouts/index.css"
+        "src/layouts/index.js",
+        "src/layouts/index.json",
+        "src/layouts/index.vue",
+        "src/layouts/index.scss",
+        "src/layouts/index.css"
       ],
       "@components/*": ["src/components/*"],
       "@components": [
@@ -239,6 +239,22 @@
         "src/accreditation/pages/index.vue",
         "src/accreditation/pages/index.scss",
         "src/accreditation/pages/index.css"
+      ],
+      "@accreditation-router/*": ["src/accreditation/router/*"],
+      "@accreditation-router": [
+        "src/accreditation/router/index.js",
+        "src/accreditation/router/index.json",
+        "src/accreditation/router/index.vue",
+        "src/accreditation/router/index.scss",
+        "src/accreditation/router/index.css"
+      ],
+      "@accreditation-components/*": ["src/accreditation/components/*"],
+      "@accreditation-components": [
+        "src/accreditation/components/index.js",
+        "src/accreditation/components/index.json",
+        "src/accreditation/components/index.vue",
+        "src/accreditation/components/index.scss",
+        "src/accreditation/components/index.css"
       ]
     }
   }
