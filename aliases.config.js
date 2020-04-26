@@ -42,6 +42,7 @@ const aliases = {
   
   '@accreditation': '.',
   '@accreditation-src': 'src/accreditation',
+  '@accreditation-pages': 'src/accreditation/pages',
   // '@accreditation-router': 'src/accreditation/router',
   // '@accreditation-views': 'src/accreditation/router/views',
   // '@accreditation-layouts': 'src/accreditation/router/layouts',

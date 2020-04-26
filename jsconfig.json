@@ -215,6 +215,30 @@
         "src/manager/state/index.vue",
         "src/manager/state/index.scss",
         "src/manager/state/index.css"
+      ],
+      "@accreditation/*": ["./*"],
+      "@accreditation": [
+        "./index.js",
+        "./index.json",
+        "./index.vue",
+        "./index.scss",
+        "./index.css"
+      ],
+      "@accreditation-src/*": ["src/accreditation/*"],
+      "@accreditation-src": [
+        "src/accreditation/index.js",
+        "src/accreditation/index.json",
+        "src/accreditation/index.vue",
+        "src/accreditation/index.scss",
+        "src/accreditation/index.css"
+      ],
+      "@accreditation-pages/*": ["src/accreditation/pages/*"],
+      "@accreditation-pages": [
+        "src/accreditation/pages/index.js",
+        "src/accreditation/pages/index.json",
+        "src/accreditation/pages/index.vue",
+        "src/accreditation/pages/index.scss",
+        "src/accreditation/pages/index.css"
       ]
     }
   }
