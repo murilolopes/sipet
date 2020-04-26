@@ -6,8 +6,8 @@ var Card = require("card");
 import { FormWizard, TabContent } from 'vue-form-wizard'
 
 import appConfig from '@sales-src/app.config'
-import Layout from '@sales-layouts/main'
-import PageHeader from '@sales-components/page-header'
+import Layout from '@layouts/wizard/main'
+import PageHeader from '@components/page-header'
 
 import Step1 from './step1'
 import Step2 from './step2'

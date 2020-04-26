@@ -1,7 +1,4 @@
 <script>
-/**
- * A page title component - Renders the title with breadcrumbs
- */
 export default {
 	components: {},
 	props: {
