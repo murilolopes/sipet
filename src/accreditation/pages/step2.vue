@@ -12,10 +12,10 @@ export default {
   validations: {},
   methods: {
     validate() {
-      this.$v.client.$touch()
-      var isValid = !this.$v.client.$invalid
-      this.$emit('on-validate', { client: this.client }, isValid)
-      return isValid
+      // this.$v.client.$touch()
+      // var isValid = !this.$v.client.$invalid
+      this.$emit('on-validate', { }, true)
+      return true
     },
   },
 }

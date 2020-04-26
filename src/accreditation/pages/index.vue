@@ -7,27 +7,38 @@ import Layout from '@layouts/wizard/main'
 import PageHeader from '@components/page-header'
 
 import Step1 from './step1'
+import Step2 from './step2'
+import Step3 from './step3'
+import Step4 from './step4'
 
 export default {
 	page: {
 		title: 'Assine',
 		meta: [{ name: 'description', content: appConfig.description }],
 	},
-	components: { Layout, PageHeader, FormWizard, TabContent, Step1 },
+	components: { Layout, PageHeader, FormWizard, TabContent, Step1, Step2, Step3, Step4 },
 	data() {
-		return {}
-	},
-	validations: {}, 
-	mounted() {},
-	computed: {
-		title() {
-			// let index = this.$refs.acreditationWizard.activeTabIndex
-			let index = 0
-			let titles = ['Informações pessoais', 'Informações sobre endereço', 'Cobertura', 'Finalização'] 
-			return titles[index]
+		return {
+			accreditationWizard: {
+				activeTabIndex: 0
+			},
 		}
 	},
-	methods: {},
+	validations: {}, 
+	mounted() {
+		this.accreditationWizard = this.$refs.accreditationWizard
+	},
+	computed: {
+		title() {
+			return ['Informações pessoais', 'Informações sobre endereço', 'Cobertura', 'Finalização'][this.accreditationWizard.activeTabIndex]
+		}
+	},
+	methods: {
+		validateStep(name) {
+			var refToValidate = this.$refs[name]
+			return refToValidate.validate()
+		},
+	},
 }
 </script>
 
@@ -38,16 +49,24 @@ export default {
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<form-wizard ref="acreditationWizard" color="#5369f8" error-color="#ff5c75" 
+						<form-wizard ref="accreditationWizard" color="#5369f8" error-color="#ff5c75" 
 							nextButtonText="Proximo" backButtonText="Voltar" finishButtonText="Finalizar">
-							<tab-content title="asd">
+							<tab-content :before-change="() => validateStep('step1')">
 								<Step1 ref="step1"/>
-							</tab-content>							
-							<b-button slot="prev" variant="outline-dark" >Voltar</b-button>
-							<b-button slot="next" variant="outline-primary"> Proximo </b-button>
-							<b-button slot="finish" variant="outline-success">
-								Finalizar
-							</b-button>
+							</tab-content>
+							<tab-content :before-change="() => validateStep('step2')">
+								<Step2 ref="step2"/>
+							</tab-content>
+							<tab-content :before-change="() => validateStep('step3')">
+								<Step3 ref="step3"/>
+							</tab-content>
+							<tab-content :before-change="() => validateStep('step4')">
+								<Step4 ref="step4"/>
+							</tab-content>
+
+							<b-button slot="prev" variant="outline-dark">Voltar</b-button>
+							<b-button slot="next" variant="outline-primary"> {{ accreditationWizard.activeTabIndex != 3 ? 'Proximo' : 'Revisar' }}</b-button>
+							<b-button slot="finish" variant="outline-success"> Finalizar </b-button>
 						</form-wizard>
 					</div>
 				</div>
