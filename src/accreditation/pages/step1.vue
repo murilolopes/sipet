@@ -1,21 +1,26 @@
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
 import Multiselect from 'vue-multiselect'
+import InputText from '@components/inputs/text'
 
 export default {
   components: {
-    Multiselect
+    Multiselect, InputText
   },
   data() {
-    return {}
+    return {
+      email: ''
+    }
   },
-  validations: {},
+  validations: {
+    email: { email, required }
+  },
   methods: {
     validate() {
-      // this.$v.client.$touch()
-      // var isValid = !this.$v.client.$invalid
-      this.$emit('on-validate', { }, true)
-      return true
+      this.$v.email.$touch()
+      var isValid = !this.$v.email.$invalid
+      this.$emit('on-validate', {email}, isValid)
+      return isValid
     },
   },
 }
@@ -24,6 +29,29 @@ export default {
 <template>
   <div>
     <form class="form-horizontal">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <InputText v-model="email" label="Email" required="true" :validations="$v.email" :errorMessages="[{key: 'email', message: 'Email inválido'}, {key: 'required', message: 'Campo requerido'}]"/>
+        </div>
+        <div class="col-12 col-md-6">
+          <b-form-group label-for="email" 
+            :class="{ 
+              'has-error': $v.email.$error, 
+              'form-group--loading': $v.email.$pending 
+            }" >
+            <label> Email <span class="text-danger">*</span> </label>
+            <input class="form-control" 
+              id="email" type="email" v-model="email"
+              :class="{ 'is-invalid': $v.email.$error }">
+             </input>
+
+            <div v-if="$v.email.$error" class="invalid-feedback">
+              <span v-if="!$v.email.required">Este campo é obrigatório.</span>
+              <span v-if="!$v.email.email">Email inválido.</span>
+            </div>
+          </b-form-group>
+        </div>
+      </div>
     </form>
   </div>
 </template>
