@@ -7,7 +7,7 @@ export default {
 		let spans = [];
 
 		errorMessages.filter(message => {
-			if (props.validations[message.key])
+			if (!props.validations[message.key])
 				spans.push(createElement("span", {}, message.message));
 		});
 

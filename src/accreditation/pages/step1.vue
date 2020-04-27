@@ -9,7 +9,8 @@ export default {
   },
   data() {
     return {
-      email: ''
+      email: '',
+      emailMessages: [{key: 'email', message: 'Email inválido'}, {key: 'required', message: 'Este campo é obrigatório.'}]
     }
   },
   validations: {
@@ -31,7 +32,7 @@ export default {
     <form class="form-horizontal">
       <div class="row">
         <div class="col-12 col-md-6">
-          <InputText v-model="email" label="Email" required="true" :validations="$v.email" :errorMessages="[{key: 'email', message: 'Email inválido'}, {key: 'required', message: 'Campo requerido'}]"/>
+          <InputText v-model="email" label="Email" required="true" :validations="$v.email" :errorMessages="emailMessages"/>
         </div>
         <div class="col-12 col-md-6">
           <b-form-group label-for="email" 
