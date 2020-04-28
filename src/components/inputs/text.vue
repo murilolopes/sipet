@@ -35,7 +35,7 @@ export default {
 		let invalidFeedback = {};
 		let errorsDiv = '';
 
-		if (props.validations.length && props.errorMessages.length) {
+		if (props.validations && props.errorMessages.length) {
 			let hasError = props.validations.$error;
 			let errorMessages = props.errorMessages;
 			errorMessages.filter(message => {
@@ -48,7 +48,7 @@ export default {
 			isInvalid["is-invalid"] = hasError;
 			invalidFeedback["invalid-feedback"] = hasError;
 
-			const errorsDiv = createElement(
+			errorsDiv = createElement(
 				"div",
 				{ class: { ...invalidFeedback } },
 				spans
@@ -73,6 +73,7 @@ export default {
 			on: { input: e => listeners.input(e.target.value) }
 		});
 
+		console.log(2, errorsDiv)
 		return createElement(
 			"div",
 			{ class: { ...formGroup, ...formGroupError, ...formGroupPending } },
