@@ -42,7 +42,7 @@ export default {
     <form class="form-horizontal">
       <div class="row">
         <div class="col-12 col-md-6">
-          <InputText v-model="$v.email.$model" label="Email" required="true" :validations="$v.email" :errorMessages="emailMessages" asyncValidation="true"/>
+          <InputText v-model="$v.email.$model" label="Email" required :validations="$v.email" :errorMessages="emailMessages"/>
         </div>
         <div class="col-12 col-md-6">
           <b-form-group label-for="email" 

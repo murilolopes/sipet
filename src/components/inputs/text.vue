@@ -1,25 +1,65 @@
 <script>
 export default {
 	functional: true,
+	props: {
+		value: {
+			type: String,
+			default: ''
+		},
+		required: {
+			type: Boolean,
+			default: false
+		},
+		validations: {
+			type: Object,
+			required: false
+		},
+		errorMessages: {
+			type: Array,
+			required: false
+		},
+		label: {
+			type: String,
+			required: true
+		}
+	},
 	render: function(createElement, { props, listeners }) {
-		let hasError = props.validations.$error;
-		let asyncValidation = props.asyncValidation;
-		let errorMessages = props.errorMessages;
-		let spans = [];
-
-		errorMessages.filter(message => {
-			if (!props.validations[message.key])
-				spans.push(createElement("span", {}, message.message));
-		});
-
 		const textDanger = { "text-danger": true };
 		const formControl = { "form-control": true };
 		const formGroup = { "form-group": true };
-		const formGroupError = { "form-group--error": props.validations.$error };
-		const formGroupPending = { "form-group--loading": props.validations.$pending };
-		const invalidFeedback = { "invalid-feedback": true };
 
-		const spanRequired = createElement("span", { class: { ...textDanger } }, "*");
+		let spans = [];
+		let formGroupError = {};
+		let formGroupPending = {};
+		let isInvalid = {};
+		let invalidFeedback = {};
+		let errorsDiv = '';
+
+		if (props.validations.length && props.errorMessages.length) {
+			let hasError = props.validations.$error;
+			let errorMessages = props.errorMessages;
+			errorMessages.filter(message => {
+				if (!props.validations[message.key])
+					spans.push(createElement("span", {}, message.message));
+			});
+
+			formGroupError["form-group--error"] = props.validations.$error;
+			formGroupPending["form-group--loading"] = props.validations.$pending;
+			isInvalid["is-invalid"] = hasError;
+			invalidFeedback["invalid-feedback"] = hasError;
+
+			const errorsDiv = createElement(
+				"div",
+				{ class: { ...invalidFeedback } },
+				spans
+			);
+		}
+
+		const spanRequired = createElement(
+			"span",
+			{ class: { ...textDanger } },
+			"*"
+		);
 
 		const label = createElement("label", {}, [
 			props.label,
@@ -27,23 +67,17 @@ export default {
 		]);
 
 		const input = createElement("input", {
-			attrs: { },
-			class: { ...formControl, "is-invalid": hasError },
+			attrs: {},
+			class: { ...formControl, ...isInvalid },
 			domProps: { value: props.value },
 			on: { input: e => listeners.input(e.target.value) }
 		});
 
-		const errorsDiv = createElement(
+		return createElement(
 			"div",
-			{ class: { ...invalidFeedback } },
-			spans
+			{ class: { ...formGroup, ...formGroupError, ...formGroupPending } },
+			[label, input, errorsDiv]
 		);
-
-		return createElement("div", { class: { ...formGroup, ...formGroupError, ...formGroupPending } }, [
-			label,
-			input,
-			hasError ? errorsDiv : ""
-		]);
 	}
 };
 </script>
