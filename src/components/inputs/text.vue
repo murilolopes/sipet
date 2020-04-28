@@ -3,6 +3,7 @@ export default {
 	functional: true,
 	render: function(createElement, { props, listeners }) {
 		let hasError = props.validations.$error;
+		let asyncValidation = props.asyncValidation;
 		let errorMessages = props.errorMessages;
 		let spans = [];
 
@@ -14,6 +15,8 @@ export default {
 		const textDanger = { "text-danger": true };
 		const formControl = { "form-control": true };
 		const formGroup = { "form-group": true };
+		const formGroupError = { "form-group--error": props.validations.$error };
+		const formGroupPending = { "form-group--loading": props.validations.$pending };
 		const invalidFeedback = { "invalid-feedback": true };
 
 		const spanRequired = createElement("span", { class: { ...textDanger } }, "*");
@@ -36,7 +39,7 @@ export default {
 			spans
 		);
 
-		return createElement("div", { class: { ...formGroup } }, [
+		return createElement("div", { class: { ...formGroup, ...formGroupError, ...formGroupPending } }, [
 			label,
 			input,
 			hasError ? errorsDiv : ""
