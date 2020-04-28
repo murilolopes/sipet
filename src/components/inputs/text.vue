@@ -6,6 +6,10 @@ export default {
 			type: String,
 			default: ''
 		},
+		type: {
+			type: String,
+			default: 'text'
+		},
 		required: {
 			type: Boolean,
 			default: false
@@ -48,11 +52,12 @@ export default {
 			isInvalid["is-invalid"] = hasError;
 			invalidFeedback["invalid-feedback"] = hasError;
 
-			errorsDiv = createElement(
-				"div",
-				{ class: { ...invalidFeedback } },
-				spans
-			);
+			if (hasError)
+				errorsDiv = createElement(
+					"div",
+					{ class: { ...invalidFeedback } },
+					spans
+				);
 		}
 
 		const spanRequired = createElement(
@@ -67,13 +72,12 @@ export default {
 		]);
 
 		const input = createElement("input", {
-			attrs: {},
+			attrs: { type: props.type },
 			class: { ...formControl, ...isInvalid },
 			domProps: { value: props.value },
 			on: { input: e => listeners.input(e.target.value) }
 		});
 
-		console.log(2, errorsDiv)
 		return createElement(
 			"div",
 			{ class: { ...formGroup, ...formGroupError, ...formGroupPending } },

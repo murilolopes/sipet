@@ -42,26 +42,7 @@ export default {
     <form class="form-horizontal">
       <div class="row">
         <div class="col-12 col-md-6">
-          <InputText v-model="$v.email.$model" label="Email" required :validations="$v.email" :errorMessages="emailMessages"/>
-        </div>
-        <div class="col-12 col-md-6">
-          <b-form-group label-for="email" 
-            :class="{ 
-              'form-group--error': $v.email.$error, 
-              'form-group--loading': $v.email.$pending 
-            }" >
-            <label> Email <span class="text-danger">*</span> </label>
-            <input class="form-control" 
-              id="email" type="email" v-model="$v.email.$model"
-              :class="{ 'is-invalid': $v.email.$error }">
-             </input>
-
-            <div v-if="$v.email.$error" class="invalid-feedback">
-              <span v-if="!$v.email.required">Este campo é obrigatório.</span>
-              <span v-if="!$v.email.email">Email inválido.</span>
-              <span v-if="!$v.email.isUnique">asd.</span>
-            </div>
-          </b-form-group>
+          <InputText v-model="$v.email.$model" label="Email" required :validations="$v.email" :errorMessages="emailMessages" type="email"/>
         </div>
       </div>
     </form>
