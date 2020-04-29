@@ -4,11 +4,15 @@ export default {
 	props: {
 		value: {
 			type: String,
-			default: ''
+			default: ""
 		},
 		type: {
 			type: String,
-			default: 'text'
+			default: "text"
+		},
+		mask: {
+			type: String,
+			required: false
 		},
 		required: {
 			type: Boolean,
@@ -33,11 +37,12 @@ export default {
 		const formGroup = { "form-group": true };
 
 		let spans = [];
+		let directives = {};
 		let formGroupError = {};
 		let formGroupPending = {};
 		let isInvalid = {};
 		let invalidFeedback = {};
-		let errorsDiv = '';
+		let errorsDiv = "";
 
 		if (props.validations && props.errorMessages.length) {
 			let hasError = props.validations.$error;
@@ -60,19 +65,25 @@ export default {
 				);
 		}
 
-		const spanRequired = createElement(
-			"span",
-			{ class: { ...textDanger } },
-			"*"
-		);
+		if (props.mask)
+			directives = {
+				directives: [
+					{
+						name: "mask",
+						value: props.mask
+					}
+				]
+			};
 
-		const label = createElement("label", {}, [
-			props.label,
-			props.required ? spanRequired : ""
-		]);
+		const spanRequired = props.required
+			? createElement("span", { class: { ...textDanger } }, "*")
+			: "";
+
+		const label = createElement("label", {}, [props.label, spanRequired]);
 
 		const input = createElement("input", {
-			attrs: { type: props.type },
+			attrs: { type: props.type, id: "foo" },
+			...directives,
 			class: { ...formControl, ...isInvalid },
 			domProps: { value: props.value },
 			on: { input: e => listeners.input(e.target.value) }
