@@ -36,7 +36,7 @@ export default {
 		const formControl = { "form-control": true };
 		const formGroup = { "form-group": true };
 
-		let directives = {};
+		let directives = [];
 		let formGroupError = {};
 		let formGroupPending = {};
 		let isInvalid = {};
@@ -67,14 +67,12 @@ export default {
 		}
 
 		if (props.mask)
-			directives = {
-				directives: [
-					{
-						name: "mask",
-						value: props.mask
-					}
-				]
-			};
+			directives = [
+				{
+					name: "mask",
+					value: props.mask
+				}
+			]
 
 		const spanRequired = props.required
 			? createElement("span", { class: { ...textDanger } }, "*")
@@ -84,7 +82,7 @@ export default {
 
 		const input = createElement("input", {
 			attrs: { type: props.type, id: "foo" },
-			...directives,
+			directives: [...directives],
 			class: { ...formControl, ...isInvalid },
 			domProps: { value: props.value },
 			on: { input: e => listeners.input(e.target.value) }
