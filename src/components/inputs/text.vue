@@ -36,7 +36,6 @@ export default {
 		const formControl = { "form-control": true };
 		const formGroup = { "form-group": true };
 
-		let spans = [];
 		let directives = {};
 		let formGroupError = {};
 		let formGroupPending = {};
@@ -46,23 +45,25 @@ export default {
 
 		if (props.validations && props.errorMessages.length) {
 			let hasError = props.validations.$error;
-			let errorMessages = props.errorMessages;
-			errorMessages.filter(message => {
-				if (!props.validations[message.key])
-					spans.push(createElement("span", {}, message.message));
-			});
 
-			formGroupError["form-group--error"] = props.validations.$error;
-			formGroupPending["form-group--loading"] = props.validations.$pending;
 			isInvalid["is-invalid"] = hasError;
 			invalidFeedback["invalid-feedback"] = hasError;
+			formGroupError["form-group--error"] = props.validations.$error;
+			formGroupPending["form-group--loading"] = props.validations.$pending;
 
-			if (hasError)
+			if (hasError) {
+				let spans = [];
+				props.errorMessages.filter(error => {
+					if (!props.validations[error.key])
+						spans.push(createElement("span", {}, error.message));
+				});
+
 				errorsDiv = createElement(
 					"div",
 					{ class: { ...invalidFeedback } },
 					spans
 				);
+			}
 		}
 
 		if (props.mask)
