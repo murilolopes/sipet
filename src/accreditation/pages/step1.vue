@@ -10,7 +10,6 @@ export default {
   },
   data() {
     return {
-
       accredited: {
         accreditationType: '0',
         vet: false,
@@ -79,8 +78,8 @@ export default {
     validate() {
       this.$v.accredited.$touch();
       var isValid = !this.$v.accredited.$invalid;
-      this.$emit("on-validate", { accredited: this.accredited }, isValid);
-      return isValid;
+      this.$emit("on-validate", { accredited: this.accredited }, true);
+      return true;
     }
   }
 };
