@@ -18,7 +18,9 @@ export default {
         neighborhood: '',
         city: '',
         state: '',
+        categories: [],
       },
+      categories: ['Clinica', 'Clinica 24h', 'Hospital', 'Laboratório'],
       zipcodeMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       addressMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       numberMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
@@ -67,6 +69,18 @@ export default {
   <div>
     <form class="form-horizontal">
       <div class="row">
+        <div class="col-12 col-md-12 text-center mt-20 mb-20">
+          <b-form-group>
+            <label> Selecione qual o porte do seu estabelecimento:</label>
+            <div class="row">
+              <div class="col-6 col-md-3" v-for="(category, index) in categories" :key="index">
+                <b-form-group>
+                  <b-form-checkbox v-model="accredited.categories" :value="category">{{ category }}</b-form-checkbox>
+                </b-form-group>
+              </div>
+            </div>
+          </b-form-group>
+        </div>
         <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.zipcode.$model"
@@ -128,3 +142,12 @@ export default {
     </form>
   </div>
 </template>
+<style>
+.mt-20 {
+  margin-top: 20px
+}
+
+.mb-20 {
+  margin-bottom: 20px
+}
+</style>
