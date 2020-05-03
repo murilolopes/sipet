@@ -8,6 +8,7 @@ export default {
     Multiselect,
     InputText
   },
+  props: ['finalObject'],
   data() {
     return {
       accredited: {
@@ -47,6 +48,11 @@ export default {
       return isValid;
     }
   },
+  computed: {
+    isEstablishment() {
+      return this.finalObject.accredited.accreditationType == '0'
+    }
+  },
   watch: {
     'accredited.zipcode'(value) {
       if (value.length == 9){
@@ -69,7 +75,7 @@ export default {
   <div>
     <form class="form-horizontal">
       <div class="row">
-        <div class="col-12 col-md-12 text-center mt-20 mb-20">
+        <div class="col-12 col-md-12 text-center mt-20 mb-20" v-if="isEstablishment">
           <b-form-group>
             <label> Selecione qual o porte do seu estabelecimento:</label>
             <div class="row">

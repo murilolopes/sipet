@@ -56,16 +56,16 @@ export default {
 						<form-wizard ref="accreditationWizard" color="#5369f8" error-color="#ff5c75" 
 							nextButtonText="Proximo" backButtonText="Voltar" finishButtonText="Finalizar">
 							<tab-content :before-change="() => validateStep('step1')">
-								<Step1 ref="step1" @on-validate="mergeFinalObject"/>
+								<Step1 :finalObject="finalObject" ref="step1" @on-validate="mergeFinalObject"/>
 							</tab-content>
 							<tab-content :before-change="() => validateStep('step2')">
-								<Step2 ref="step2" @on-validate="mergeFinalObject"/>
+								<Step2 :finalObject="finalObject" ref="step2" @on-validate="mergeFinalObject"/>
 							</tab-content>
 							<tab-content :before-change="() => validateStep('step3')">
-								<Step3 ref="step3" @on-validate="mergeFinalObject"/>
+								<Step3 :finalObject="finalObject" ref="step3" @on-validate="mergeFinalObject"/>
 							</tab-content>
 							<tab-content :before-change="() => validateStep('step4')">
-								<Step4 ref="step4" @on-validate="mergeFinalObject"/>
+								<Step4 :finalObject="finalObject" ref="step4" @on-validate="mergeFinalObject"/>
 							</tab-content>
 
 							<b-button slot="prev" variant="outline-dark">Voltar</b-button>
