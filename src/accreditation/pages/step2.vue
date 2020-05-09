@@ -8,7 +8,7 @@ export default {
     Multiselect,
     InputText
   },
-  props: ['finalObject'],
+  props: ['accreditation'],
   data() {
     return {
       accredited: {
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     isEstablishment() {
-      return this.finalObject.accredited.accreditationType == '0'
+      return this.accreditation.accredited.accreditationType == 0
     }
   },
   watch: {

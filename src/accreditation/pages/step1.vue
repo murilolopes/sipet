@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       accredited: {
-        accreditationType: '0',
+        accreditationType: 0,
         vet: false,
         name: '',
         cpf: '',
@@ -99,7 +99,7 @@ export default {
               id="accreditationTypeCheck1"
               type="radio"
               class="custom-control-input"
-              value="0"
+              :value="0"
             />
             <label class="custom-control-label" for="accreditationTypeCheck1">
               Estabelecimento
@@ -113,7 +113,7 @@ export default {
               id="accreditationTypeCheck2"
               type="radio"
               class="custom-control-input"
-              value="1"
+              :value="1"
             />
             <label class="custom-control-label" for="accreditationTypeCheck2">
               Veterinário autônomo
