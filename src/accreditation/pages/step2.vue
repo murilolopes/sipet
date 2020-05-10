@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     isEstablishment() {
-      return this.accreditation.accredited.accreditationType == 0
+      return this.accreditation.accredited && this.accreditation.accredited.accreditationType == 0
     }
   },
   watch: {

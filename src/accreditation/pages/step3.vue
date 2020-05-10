@@ -2,15 +2,30 @@
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
 import Multiselect from 'vue-multiselect'
 
+import { categoryMethods } from '@manager-state/helpers'
+
 export default {
   components: {
     Multiselect
   },
   data() {
-    return {}
+    return {
+      categories: [],
+      selectedCategories: [],
+      mu: []
+    }
   },
   validations: {},
+  created() {
+    this.$api('/categories').then(resp => {
+      this.categories = resp.data
+      resp.data.filter(c => {
+        this.selectedCategories[c.id] = { services: [] }
+      })
+    })
+  },
   methods: {
+    ...categoryMethods,
     validate() {
       // this.$v.client.$touch()
       // var isValid = !this.$v.client.$invalid
@@ -23,7 +38,29 @@ export default {
 
 <template>
   <div>
-    <form class="form-horizontal">
-    </form>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <b-tabs class="navtab-bg" pills justified>
+              <div v-for="category in categories">
+                <b-tab :title="category.name">
+                  <template slot="title"> 
+                    {{ category.name }}
+                  </template>
+                  <div class="row">
+                    <div class="col-3 text-center" v-for="service in category.services">
+                      <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected mb-2">
+                        <b-form-checkbox v-model="selectedCategories[category.id].services" :value="service.id">{{ service.name }}</b-form-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </b-tab>
+              </div>
+            </b-tabs>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
