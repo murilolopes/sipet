@@ -11,26 +11,22 @@ export default {
   data() {
     return {
       categories: [],
-      selectedCategories: [],
-      mu: []
+      selectedServices: [],
     }
   },
   validations: {},
   created() {
     this.$api('/categories').then(resp => {
       this.categories = resp.data
-      resp.data.filter(c => {
-        this.selectedCategories[c.id] = { services: [] }
-      })
     })
   },
   methods: {
     ...categoryMethods,
     validate() {
-      // this.$v.client.$touch()
-      // var isValid = !this.$v.client.$invalid
-      this.$emit('on-validate', { }, true)
-      return true
+      this.$v.client.$touch()
+      var isValid = !this.$v.client.$invalid
+      this.$emit('on-validate', { }, isValid)
+      return isValid
     },
   },
 }
@@ -51,7 +47,7 @@ export default {
                   <div class="row">
                     <div class="col-3 text-center" v-for="service in category.services">
                       <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected mb-2">
-                        <b-form-checkbox v-model="selectedCategories[category.id].services" :value="service.id">{{ service.name }}</b-form-checkbox>
+                        <b-form-checkbox v-model="selectedServices" :value="service.id">{{ service.name }}</b-form-checkbox>
                       </div>
                     </div>
                   </div>
