@@ -199,8 +199,8 @@ export default {
         </div>
       </div>
 
-      <div class="row" v-if="accredited.accreditationType == 0">
-        <div class="col-12 text-center">
+      <div class="row">
+        <div class="col-12 text-center" v-if="accredited.accreditationType == 0">
           <b-form-group>
             <label> Você atuará como veterinário no estabelecimento em questão? </label>
             <b-form-checkbox v-model="accredited.vet" name="check-button" switch>
@@ -209,7 +209,7 @@ export default {
           </b-form-group>
         </div>
 
-        <div class="col-6 col-md-3" v-if="accredited.vet">
+        <div class="col-6 col-md-3" v-if="accredited.vet || accredited.accreditationType == 1">
           <InputText
             v-model="$v.accredited.crmv.$model"
             label="CRMV"
@@ -219,7 +219,7 @@ export default {
           />
         </div>
 
-        <div class="col-6 col-md-3" v-if="accredited.vet">
+        <div class="col-6 col-md-3" v-if="accredited.vet || accredited.accreditationType == 1">
           <InputText
             v-model="$v.accredited.crmv_uf.$model"
             label="UF"
