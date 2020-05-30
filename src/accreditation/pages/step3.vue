@@ -1,5 +1,5 @@
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { minLength } from "vuelidate/lib/validators";
 import Multiselect from "vue-multiselect";
 
 import { categoryMethods } from "@manager-state/helpers";
@@ -85,7 +85,7 @@ export default {
       var isValid = !this.$v.selectedServices.$invalid;
       if (!isValid) 
         Swal.fire('Atenção!', 'É necessário escolher ao menos 10 serviços!', 'warning')
-      this.$emit("on-validate", {}, isValid);
+      this.$emit("on-validate", { selectedServices: this.selectedServices }, isValid);
       return isValid;
     }
   },

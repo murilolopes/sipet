@@ -40,7 +40,7 @@ export default {
 			return refToValidate.validate()
 		},
 		mergeFinalObject(model, isValid) {
-			if (isValid) this.finalObject = model
+			if (isValid) this.finalObject = Object.assign(this.finalObject, model);
 		},
 	},
 }

@@ -44,7 +44,7 @@ export default {
     validate() {
       this.$v.accredited.$touch();
       var isValid = !this.$v.accredited.$invalid;
-      this.$emit("on-validate", { accredited: this.accredited }, isValid);
+      this.$emit("on-validate", this.accredited, isValid);
       return isValid;
     }
   },
