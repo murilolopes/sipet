@@ -11,21 +11,25 @@ export default {
   data() {
     return {
       selectedCategory: {},
+      all_categories: [],
       categories: [],
       selectedServices: []
     };
   },
   validations: {},
   mounted() {
-    this.$api("/categories").then(resp => {
-      this.categories = resp.data;
-    });
+    this.getCategories()
   },
   methods: {
     ...categoryMethods,
+    getCategories() {
+      this.$api("/categories").then(resp => {
+        this.all_categories = resp.data;
+      });
+    },
     selectAllServicesByCategory(category_id) {
       let count = 0;
-      let category = this.categories.filter(c => {
+      let category = this.all_categories.filter(c => {
         if (c.id == category_id) return c;
       })[0];
 
@@ -48,25 +52,26 @@ export default {
         return true;
       }
 
-      this.categories.filter(c => {
+      this.all_categories.filter(c => {
         if (c.id == category_id)
           c.services.filter(s => this.selectedServices.push(s.id));
       });
     },
     canSelectAll(category_id) {
-      this.selectedCategory = this.categories.filter(c => {
-        if (c.id == category_id) return c;
-      })[0];
-
-      return this.hasSelectedService()
+      return this.hasSelectedService(category_id)
         ? "Remover selecionados"
         : "Selecionar todos";
     },
 
-    hasSelectedService() {
+    hasSelectedService(category_id) {
       let count = 0;
-      if (this.selectedCategory.id)
-        this.selectedCategory.services.filter(s => {
+      let selectedCategory = this.all_categories.filter(c => {
+        if (c.id == category_id) return c;
+      })[0];
+
+      console.log(1, selectedCategory)
+      if (selectedCategory.id)
+        selectedCategory.services.filter(s => {
           this.selectedServices.filter(ss => {
             if (s.id == ss) count++;
           });
@@ -90,7 +95,7 @@ export default {
         <div class="card">
           <div class="card-body">
             <b-tabs class="navtab-bg" pills justified>
-              <div v-for="category in categories">
+              <div v-for="category in all_categories">
                 <b-tab :title="category.name">
                   <template slot="title">
                     {{ category.name }}
