@@ -69,7 +69,6 @@ export default {
         if (c.id == category_id) return c;
       })[0];
 
-      console.log(1, selectedCategory)
       if (selectedCategory.id)
         selectedCategory.services.filter(s => {
           this.selectedServices.filter(ss => {
