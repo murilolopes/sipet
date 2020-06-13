@@ -32,6 +32,9 @@ export default {
 	computed: {
 		title() {
 			return ['Informações pessoais', 'Informações sobre endereço', 'Cobertura', 'Finalização'][this.accreditationWizard.activeTabIndex]
+		},
+		isEstablishment() {
+			return this.finalObject.accreditation && this.finalObject.accreditation.accreditationType
 		}
 	},
 	methods: {
@@ -59,7 +62,7 @@ export default {
 								<Step1 :accreditation="finalObject" ref="step1" @on-validate="mergeFinalObject"/>
 							</tab-content>
 							<tab-content :before-change="() => validateStep('step2')">
-								<Step2 :accreditation="finalObject" ref="step2" @on-validate="mergeFinalObject"/>
+								<Step2 :accreditation="finalObject" :isEstablishment="isEstablishment" ref="step2" @on-validate="mergeFinalObject"/>
 							</tab-content>
 							<tab-content :before-change="() => validateStep('step3')">
 								<Step3 :accreditation="finalObject" ref="step3" @on-validate="mergeFinalObject"/>

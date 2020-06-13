@@ -2,15 +2,16 @@
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
 import Multiselect from 'vue-multiselect'
 import InputText from "@components/inputs/text";
+import { EventBus } from "./../../plugins/event-bus.js";
 
 export default {
   components: {
     Multiselect,
     InputText
   },
-  props: ['accreditation'],
   data() {
     return {
+      isEstablishment: true,
       accredited: {
         fantasy_name: '',
         cnpj: '',
@@ -60,10 +61,10 @@ export default {
       return isValid;
     }
   },
-  computed: {
-    isEstablishment() {
-      return this.accreditation.accreditationType === 0
-    }
+  mounted(){
+    EventBus.$on('accreditationType', isEstablishment => {
+      this.isEstablishment = isEstablishment
+    });
   },
   watch: {
     'accredited.zipcode'(value) {
@@ -86,8 +87,8 @@ export default {
 <template>
   <div>
     <form class="form-horizontal">
-      <div class="row">
-        <div class="col-12 col-md-12 text-center mt-20 mb-20" v-if="isEstablishment">
+      <div class="row" v-if="isEstablishment">
+        <div class="col-12 col-md-12 text-center mt-20 mb-20">
           <b-form-group>
             <label> Selecione qual o porte do seu estabelecimento:</label>
             <div class="row">
@@ -99,7 +100,7 @@ export default {
             </div>
           </b-form-group>
         </div>
-        <div class="col-12 col-md-6" v-if="isEstablishment">
+        <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.fantasy_name.$model"
             label="Nome Fantasia"
@@ -108,7 +109,7 @@ export default {
             :errorMessages="fantasyNameMessages"
           />
         </div>
-        <div class="col-12 col-md-6" v-if="isEstablishment">
+        <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.cnpj.$model"
             label="CNPJ"
@@ -118,7 +119,7 @@ export default {
             :errorMessages="cnpjMessages"
           />
         </div>
-        <div class="col-12 col-md-6" v-if="isEstablishment">
+        <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.phone.$model"
             label="Telefone para contato"
@@ -128,7 +129,7 @@ export default {
             :errorMessages="phoneMessages"
           />
         </div>
-        <div class="col-12 col-md-6" v-if="isEstablishment">
+        <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.foundation_date.$model"
             label="Data de abertura"
@@ -138,7 +139,10 @@ export default {
             :errorMessages="foundationDateMessages"
           />
         </div>
-        <div class="col-12 col-md-6" v-if="isEstablishment">
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.zipcode.$model"
             label="CEP"

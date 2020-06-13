@@ -2,6 +2,7 @@
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 import Multiselect from "vue-multiselect";
 import InputText from "@components/inputs/text";
+import { EventBus } from "./../../plugins/event-bus.js";
 
 export default {
   components: {
@@ -13,32 +14,82 @@ export default {
       accredited: {
         accreditationType: 0,
         vet: false,
-        name: '',
-        cpf: '',
-        birthdate: '',
-        phone: '',
-        crmv: '',
-        crmv_uf: '',
+        name: "",
+        cpf: "",
+        birthdate: "",
+        phone: "",
+        crmv: "",
+        crmv_uf: "",
         credential_attributes: {
-          credential_type: 'client',
-          email: '',
-          password: '',
-          password_confirmation: '',
+          credential_type: "client",
+          email: "",
+          password: "",
+          password_confirmation: ""
         }
       },
-      states: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 
-        'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 
-        'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+      states: [
+        "AC",
+        "AL",
+        "AP",
+        "AM",
+        "BA",
+        "CE",
+        "DF",
+        "ES",
+        "GO",
+        "MA",
+        "MT",
+        "MS",
+        "MG",
+        "PA",
+        "PB",
+        "PR",
+        "PE",
+        "PI",
+        "RJ",
+        "RN",
+        "RS",
+        "RO",
+        "RR",
+        "SC",
+        "SP",
+        "SE",
+        "TO"
       ],
-      nameMessages: [{ key: "required", message: "Este campo é obrigatório. " },],
-      cpfMessages: [{ key: "required", message: "Este campo é obrigatório. " },],
-      birthdateMessages: [{ key: "required", message: "Este campo é obrigatório. " }, { key: "date", message: "Data inválida. " }],
-      phoneMessages: [{ key: "required", message: "Este campo é obrigatório. " },{ key: "minLength", message: "Número de telefone incompleto. " }],
-      emailMessages: [{ key: "required", message: "Este campo é obrigatório. " },{ key: "email", message: "Email inválido. " },{ key: "isUnique", message: "Email já cadastrado. " }],
-      passwordMessages: [{ key: "required", message: "Este campo é obrigatório. " },{ key: "minLength", message: "Senha deve conter no minimo 8 caracteres. " }],
-      passwordConfirmationMessages: [{ key: "required", message: "Este campo é obrigatório. " },{ key: "sameAsPassword", message: "Senha deve ser identica. " }],
-      crmvMessages: [{ key: "required", message: "Este campo é obrigatório. " }],
-      crmvUfMessages: [{ key: "required", message: "Este campo é obrigatório. " }],
+      nameMessages: [
+        { key: "required", message: "Este campo é obrigatório. " }
+      ],
+      cpfMessages: [{ key: "required", message: "Este campo é obrigatório. " }],
+      birthdateMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        { key: "date", message: "Data inválida. " }
+      ],
+      phoneMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        { key: "minLength", message: "Número de telefone incompleto. " }
+      ],
+      emailMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        { key: "email", message: "Email inválido. " },
+        { key: "isUnique", message: "Email já cadastrado. " }
+      ],
+      passwordMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        {
+          key: "minLength",
+          message: "Senha deve conter no minimo 8 caracteres. "
+        }
+      ],
+      passwordConfirmationMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        { key: "sameAsPassword", message: "Senha deve ser identica. " }
+      ],
+      crmvMessages: [
+        { key: "required", message: "Este campo é obrigatório. " }
+      ],
+      crmvUfMessages: [
+        { key: "required", message: "Este campo é obrigatório. " }
+      ]
     };
   },
   validations: {
@@ -46,10 +97,11 @@ export default {
       name: { required },
       cpf: { required },
       birthdate: {
-        required, 
-        date: async (value) => { 
-          if (value.length == 10) return moment(value, 'DD/MM/YYYY', true).isValid()
-          return true
+        required,
+        date: async value => {
+          if (value.length == 10)
+            return moment(value, "DD/MM/YYYY", true).isValid();
+          return true;
         }
       },
       phone: { required, minLength: minLength(15) },
@@ -60,7 +112,11 @@ export default {
           email,
           required,
           async isUnique(value) {
-            if (value === "" || !this.$v.accredited.credential_attributes.email.email) return true;
+            if (
+              value === "" ||
+              !this.$v.accredited.credential_attributes.email.email
+            )
+              return true;
             if (this.$v.accredited.credential_attributes.email.email) {
               const response = await this.$api.post("clients/by_email", {
                 email: value
@@ -70,9 +126,9 @@ export default {
           }
         },
         password: { required, minLength: minLength(8) },
-        password_confirmation: { required, sameAsPassword: sameAs('password') },
+        password_confirmation: { required, sameAsPassword: sameAs("password") }
       }
-    },
+    }
   },
   methods: {
     validate() {
@@ -80,6 +136,11 @@ export default {
       var isValid = !this.$v.accredited.$invalid;
       this.$emit("on-validate", this.accredited, true);
       return true;
+    }
+  },
+  watch: {
+    "accredited.accreditationType"(val) {
+      EventBus.$emit("accreditationType", !this.accredited.accreditationType);
     }
   }
 };
@@ -90,7 +151,9 @@ export default {
     <form class="form-horizontal">
       <div class="row">
         <div class="col-12">
-          <h4 class="font-size-15 mt-3 text-center">Como deseja se credenciar?</h4>
+          <h4 class="font-size-15 mt-3 text-center">
+            Como deseja se credenciar?
+          </h4>
         </div>
         <div class="col-6 text-right">
           <div class="custom-control custom-radio mb-2">
@@ -165,7 +228,7 @@ export default {
             mask="(##) #####-####"
           />
         </div>
-        <hr>
+        <hr />
         <div class="col-12 col-md-6">
           <InputText
             v-model="$v.accredited.credential_attributes.email.$model"
@@ -189,10 +252,14 @@ export default {
 
         <div class="col-12 col-md-3">
           <InputText
-            v-model="$v.accredited.credential_attributes.password_confirmation.$model"
+            v-model="
+              $v.accredited.credential_attributes.password_confirmation.$model
+            "
             label="Confirmação de senha"
             required
-            :validations="$v.accredited.credential_attributes.password_confirmation"
+            :validations="
+              $v.accredited.credential_attributes.password_confirmation
+            "
             :errorMessages="passwordConfirmationMessages"
             type="password"
           />
@@ -200,16 +267,28 @@ export default {
       </div>
 
       <div class="row">
-        <div class="col-12 text-center" v-if="accredited.accreditationType == 0">
+        <div
+          class="col-12 text-center"
+          v-if="accredited.accreditationType == 0"
+        >
           <b-form-group>
-            <label> Você atuará como veterinário no estabelecimento em questão? </label>
-            <b-form-checkbox v-model="accredited.vet" name="check-button" switch>
-              {{ accredited.vet ? 'Sim' : 'Não'}}
+            <label>
+              Você atuará como veterinário no estabelecimento em questão?
+            </label>
+            <b-form-checkbox
+              v-model="accredited.vet"
+              name="check-button"
+              switch
+            >
+              {{ accredited.vet ? "Sim" : "Não" }}
             </b-form-checkbox>
           </b-form-group>
         </div>
 
-        <div class="col-6 col-md-3" v-if="accredited.vet || accredited.accreditationType == 1">
+        <div
+          class="col-6 col-md-3"
+          v-if="accredited.vet || accredited.accreditationType == 1"
+        >
           <InputText
             v-model="$v.accredited.crmv.$model"
             label="CRMV"
@@ -219,7 +298,10 @@ export default {
           />
         </div>
 
-        <div class="col-6 col-md-3" v-if="accredited.vet || accredited.accreditationType == 1">
+        <div
+          class="col-6 col-md-3"
+          v-if="accredited.vet || accredited.accreditationType == 1"
+        >
           <InputText
             v-model="$v.accredited.crmv_uf.$model"
             label="UF"
