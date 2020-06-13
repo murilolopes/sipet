@@ -12,6 +12,10 @@ export default {
   data() {
     return {
       accredited: {
+        fantasy_name: '',
+        cnpj: '',
+        phone: '',
+        foundation_date: '',
         zipcode: '',
         address: '',
         number: '',
@@ -22,6 +26,10 @@ export default {
         categories: [],
       },
       categories: ['Clinica', 'Clinica 24h', 'Hospital', 'Laboratório'],
+      fantasyNameMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
+      cnpjMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
+      phoneMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
+      foundationDateMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       zipcodeMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       addressMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       numberMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
@@ -32,6 +40,10 @@ export default {
   },
   validations: {
     accredited: {
+      fantasy_name: { required },
+      cnpj: { required },
+      phone: { required },
+      foundation_date: { required },
       zipcode: { required },
       address: { required },
       number: { required },
@@ -50,7 +62,7 @@ export default {
   },
   computed: {
     isEstablishment() {
-      return this.accreditation.accredited && this.accreditation.accredited.accreditationType == 0
+      return this.accreditation.accreditationType === 0
     }
   },
   watch: {
@@ -87,7 +99,46 @@ export default {
             </div>
           </b-form-group>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6" v-if="isEstablishment">
+          <InputText
+            v-model="$v.accredited.fantasy_name.$model"
+            label="Nome Fantasia"
+            required
+            :validations="$v.accredited.fantasy_name"
+            :errorMessages="fantasyNameMessages"
+          />
+        </div>
+        <div class="col-12 col-md-6" v-if="isEstablishment">
+          <InputText
+            v-model="$v.accredited.cnpj.$model"
+            label="CNPJ"
+            required
+            mask="##.###.###/####-##"
+            :validations="$v.accredited.cnpj"
+            :errorMessages="cnpjMessages"
+          />
+        </div>
+        <div class="col-12 col-md-6" v-if="isEstablishment">
+          <InputText
+            v-model="$v.accredited.phone.$model"
+            label="Telefone para contato"
+            required
+            mask="(##) #####-####"
+            :validations="$v.accredited.phone"
+            :errorMessages="phoneMessages"
+          />
+        </div>
+        <div class="col-12 col-md-6" v-if="isEstablishment">
+          <InputText
+            v-model="$v.accredited.foundation_date.$model"
+            label="Data de abertura"
+            required
+            mask="##/##/####"
+            :validations="$v.accredited.foundation_date"
+            :errorMessages="foundationDateMessages"
+          />
+        </div>
+        <div class="col-12 col-md-6" v-if="isEstablishment">
           <InputText
             v-model="$v.accredited.zipcode.$model"
             label="CEP"
