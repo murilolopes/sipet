@@ -26,6 +26,7 @@ export default {
         categories: [],
       },
       categories: ['Clinica', 'Clinica 24h', 'Hospital', 'Laboratório'],
+      categoriesMessages: [{key: 'minLength', message: 'Selecione ao menos um porte. '}],
       fantasyNameMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       cnpjMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       companyPhoneMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
@@ -40,6 +41,7 @@ export default {
   },
   validations: {
     accredited: {
+      categories: { required, minLength: minLength(1) },
       fantasy_name: { required },
       cnpj: { required },
       companyPhone: { required },
@@ -84,11 +86,11 @@ export default {
       <div class="row">
         <div class="col-12 col-md-12 text-center mt-20 mb-20">
           <b-form-group>
-            <label> Selecione qual o porte do seu estabelecimento:</label>
+            <label> Selecione qual o porte do seu estabelecimento(ao menos um)</label>
             <div class="row">
               <div class="col-6 col-md-3" v-for="(category, index) in categories" :key="index">
                 <b-form-group>
-                  <b-form-checkbox v-model="accredited.categories" :value="category">{{ category }}</b-form-checkbox>
+                  <b-form-checkbox v-model="$v.accredited.categories.$model" :value="category">{{ category }}</b-form-checkbox>
                 </b-form-group>
               </div>
             </div>
