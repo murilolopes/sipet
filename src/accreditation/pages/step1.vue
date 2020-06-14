@@ -231,49 +231,11 @@ export default {
       </div>
 
       <div class="row">
-        <div class="col-6">
-          <h4 class="font-size-15 mt-3 text-center">
-            Como deseja se credenciar?
-          </h4>
-        </div>
-        <div class="col-6" v-if="accredited.accreditationType == 0">
-          <h4 class="font-size-15 mt-3 text-center">
-              Você atuará como veterinário no estabelecimento em questão?
-          </h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-3 text-right">
-          <div class="custom-control custom-radio mb-2">
-            <input
-              v-model="accredited.accreditationType"
-              id="accreditationTypeCheck1"
-              type="radio"
-              class="custom-control-input"
-              :value="0"
-            />
-            <label class="custom-control-label" for="accreditationTypeCheck1">
-              Estabelecimento
-            </label>
-          </div>
-        </div>
-        <div class="col-3 text-left">
-          <div class="custom-control custom-radio">
-            <input
-              v-model="accredited.accreditationType"
-              id="accreditationTypeCheck2"
-              type="radio"
-              class="custom-control-input"
-              :value="1"
-            />
-            <label class="custom-control-label" for="accreditationTypeCheck2">
-              Veterinário autônomo
-            </label>
-          </div>
-        </div>
-
-        <div class="col-6 text-center" v-if="accredited.accreditationType == 0">
+        <div class="col-6 text-center">
           <b-form-group>
+            <h4 class="font-size-15 mt-3 text-center">
+                Você atuará como veterinário no estabelecimento em questão?
+            </h4>
             <b-form-checkbox
               v-model="accredited.vet"
               name="check-button"
@@ -283,19 +245,16 @@ export default {
             </b-form-checkbox>
           </b-form-group>
         </div>
-      </div>
-
-      <div class="row" v-if="accredited.vet || accredited.accreditationType == 1">
-        <div class="col-6 col-md-3">
-          <InputText
-            v-model="$v.accredited.crmv.$model"
-            label="CRMV"
-            required
-            :validations="$v.accredited.crmv"
-            :errorMessages="crmvMessages"
-          />
+        <div class="col-3" v-if="accredited.vet">
+            <InputText
+              v-model="$v.accredited.crmv.$model"
+              label="CRMV"
+              required
+              :validations="$v.accredited.crmv"
+              :errorMessages="crmvMessages"
+            />
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-3" v-if="accredited.vet">
           <InputText
             v-model="$v.accredited.crmv_uf.$model"
             label="UF"

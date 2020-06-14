@@ -11,7 +11,6 @@ export default {
   },
   data() {
     return {
-      isEstablishment: true,
       accredited: {
         fantasy_name: '',
         cnpj: '',
@@ -41,10 +40,10 @@ export default {
   },
   validations: {
     accredited: {
-      fantasy_name: { required: requiredIf(function() {return this.isEstablishment })},
-      cnpj: { required: requiredIf(function() {return this.isEstablishment })},
-      companyPhone: { required: requiredIf(function() {return this.isEstablishment })},
-      foundation_date: { required: requiredIf(function() {return this.isEstablishment })},
+      fantasy_name: { required },
+      cnpj: { required },
+      companyPhone: { required },
+      foundation_date: { required },
       zipcode: { required },
       address: { required },
       number: { required },
@@ -60,11 +59,6 @@ export default {
       this.$emit("on-validate", this.accredited, isValid);
       return isValid;
     }
-  },
-  mounted(){
-    EventBus.$on('accreditationType', isEstablishment => {
-      this.isEstablishment = isEstablishment
-    });
   },
   watch: {
     'accredited.zipcode'(value) {
@@ -87,7 +81,7 @@ export default {
 <template>
   <div>
     <form class="form-horizontal">
-      <div class="row" v-if="isEstablishment">
+      <div class="row">
         <div class="col-12 col-md-12 text-center mt-20 mb-20">
           <b-form-group>
             <label> Selecione qual o porte do seu estabelecimento:</label>
