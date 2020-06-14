@@ -54,7 +54,7 @@ export default {
             <strong>CPF:</strong> {{ $attrs.accreditation.cpf }}<br />
             <strong>Nascimento:</strong> {{ $attrs.accreditation.birthdate }}<br />
             <strong>Telefone para contato:</strong>{{ $attrs.accreditation.phone }}<br />
-            <strong>Email:</strong>{{ $attrs.accreditation.credential_attributes.email }}<br>
+            <strong>Email:</strong>{{ $attrs.accreditation.credential_attributes ? $attrs.accreditation.credential_attributes.email : '' }}<br>
             <span v-if="$attrs.accreditation.vet"><strong>CRMV:</strong> {{ $attrs.accreditation.crmv }}/{{ $attrs.accreditation.crmv_uf }}<br /></span>
           </div>
         </div>

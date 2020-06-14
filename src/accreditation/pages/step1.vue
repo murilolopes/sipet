@@ -4,6 +4,31 @@ import Multiselect from "vue-multiselect";
 import InputText from "@components/inputs/text";
 import { EventBus } from "./../../plugins/event-bus.js";
 
+const cpf = (value) => {
+  var soma;
+  var resto;
+  soma = 0;
+  if (value.length == 14) {
+    value = value.replace('-', '').replace('.', '').replace('.', '')
+    if (value == "00000000000") return false;
+     
+    for (let i=1; i<=9; i++) soma = soma + parseInt(value.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(value.substring(9, 10)) ) return false;
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma = soma + parseInt(value.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(value.substring(10, 11) ) ) return false;
+    return true;
+  }
+  return true
+}
+
 export default {
   components: {
     Multiselect,
@@ -59,7 +84,11 @@ export default {
       nameMessages: [
         { key: "required", message: "Este campo é obrigatório. " }
       ],
-      cpfMessages: [{ key: "required", message: "Este campo é obrigatório. " }],
+      cpfMessages: [
+        { key: "required", message: "Este campo é obrigatório. " },
+        { key: "cpf", message: "CPF inválido. " },
+        { key: "isUnique", message: "CPF já cadastrado. " },
+      ],
       birthdateMessages: [
         { key: "required", message: "Este campo é obrigatório. " },
         { key: "date", message: "Data inválida. " }
@@ -95,7 +124,18 @@ export default {
   validations: {
     accredited: {
       name: { required },
-      cpf: { required },
+      cpf: { 
+        required,
+        cpf,
+        async isUnique(value) {
+          if (value === '' || value.length < 14) return true
+          if (this.$v.accredited.cpf.cpf) {
+            const response = await this.$api.post('clients/by_cpf', { cpf: value })
+            return !response.data
+          }
+          return true
+        }
+      },
       birthdate: {
         required,
         date: async value => {
@@ -112,11 +152,7 @@ export default {
           email,
           required,
           async isUnique(value) {
-            if (
-              value === "" ||
-              !this.$v.accredited.credential_attributes.email.email
-            )
-              return true;
+            if (value === "" || !this.$v.accredited.credential_attributes.email.email) return true;
             if (this.$v.accredited.credential_attributes.email.email) {
               const response = await this.$api.post("clients/by_email", {
                 email: value
@@ -134,8 +170,8 @@ export default {
     validate() {
       this.$v.accredited.$touch();
       var isValid = !this.$v.accredited.$invalid;
-      this.$emit("on-validate", this.accredited, true);
-      return true;
+      this.$emit("on-validate", this.accredited, isValid);
+      return isValid;
     }
   },
   watch: {
