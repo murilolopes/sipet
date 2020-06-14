@@ -1,5 +1,5 @@
 <script>
-import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+import { required, minLength, email, sameAs, requiredIf } from 'vuelidate/lib/validators'
 import Multiselect from 'vue-multiselect'
 import InputText from "@components/inputs/text";
 import { EventBus } from "./../../plugins/event-bus.js";
@@ -15,7 +15,7 @@ export default {
       accredited: {
         fantasy_name: '',
         cnpj: '',
-        phone: '',
+        companyPhone: '',
         foundation_date: '',
         zipcode: '',
         address: '',
@@ -29,7 +29,7 @@ export default {
       categories: ['Clinica', 'Clinica 24h', 'Hospital', 'Laboratório'],
       fantasyNameMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       cnpjMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
-      phoneMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
+      companyPhoneMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       foundationDateMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       zipcodeMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
       addressMessages: [{key: 'required', message: 'Este campo é obrigatório. '}],
@@ -41,10 +41,10 @@ export default {
   },
   validations: {
     accredited: {
-      fantasy_name: { required },
-      cnpj: { required },
-      phone: { required },
-      foundation_date: { required },
+      fantasy_name: { required: requiredIf(function() {return this.isEstablishment })},
+      cnpj: { required: requiredIf(function() {return this.isEstablishment })},
+      companyPhone: { required: requiredIf(function() {return this.isEstablishment })},
+      foundation_date: { required: requiredIf(function() {return this.isEstablishment })},
       zipcode: { required },
       address: { required },
       number: { required },
@@ -121,12 +121,12 @@ export default {
         </div>
         <div class="col-12 col-md-6">
           <InputText
-            v-model="$v.accredited.phone.$model"
+            v-model="$v.accredited.companyPhone.$model"
             label="Telefone para contato"
             required
             mask="(##) #####-####"
-            :validations="$v.accredited.phone"
-            :errorMessages="phoneMessages"
+            :validations="$v.accredited.companyPhone"
+            :errorMessages="companyPhoneMessages"
           />
         </div>
         <div class="col-12 col-md-6">
