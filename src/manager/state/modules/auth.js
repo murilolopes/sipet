@@ -48,6 +48,10 @@ export const actions = {
     return Auth.resetPassword({ email })
   },
 
+  getInvitationResource({ dispatch }, invitation_token) {
+    return Auth.getInvitationResource(invitation_token)
+  },
+
   logOut({ commit }) {
     commit('SET_CURRENT_USER', null)
   },

@@ -16,9 +16,9 @@ const authRoutes = [
     },
   },
   {
-    path: '/confirm-account',
-    name: 'confirm-account',
-    component: () => lazyLoadView(import('@manager-views/pages/account/confirm')),
+    path: '/accept-invitation',
+    name: 'accept-invitation',
+    component: () => lazyLoadView(import('@manager-views/pages/account/invitation')),
     meta: {
       beforeResolve(routeTo, routeFrom, next) {
         if (store.getters['auth/loggedIn']) {

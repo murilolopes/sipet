@@ -16,4 +16,9 @@ export class Auth {
   static resetPassword({ email }) {
     return AXIOS.post('/auth/password', { email });
   }
+
+  static getInvitationResource(invitation_token) {
+    AXIOS.baseURL =  ''
+    return AXIOS({url: `/credential/invitation/accept?invitation_token=${invitation_token}`, baseURL: 'http://localhost:3000/api'});
+  }
 }

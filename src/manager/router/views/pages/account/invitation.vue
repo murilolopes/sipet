@@ -3,9 +3,6 @@ import Layout from '@manager-layouts/default'
 import { authMethods } from '@manager-state/helpers'
 import appConfig from '@manager-src/app.config'
 
-/**
- * Register component
- */
 export default {
 	page: {
 		title: 'Register',
@@ -22,14 +19,16 @@ export default {
 			isRegisterError: false,
 		}
 	},
+	mounted(){
+		let invit = this.$route.query.invitation_token
+		this.getInvitationResource(invit);
+		
+	},
 	computed: {},
 	methods: {
 		...authMethods,
-		// Try to register the user in with the email, fullname
-		// and password they provided.
 		tryToRegisterIn() {
 			this.tryingToRegister = true
-			// Reset the regError if it existed.
 			this.regError = null
 			return this.register({
 				fullname: this.fullname,
@@ -39,7 +38,6 @@ export default {
 				.then((token) => {
 					this.tryingToRegister = false
 					this.isRegisterError = false
-					// Redirect to the originally requested page, or to the confirm-account page
 					this.$router.push(
 						this.$route.query.redirectFrom || { name: 'confirm-account' }
 					)
