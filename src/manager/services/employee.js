@@ -3,10 +3,10 @@ import AXIOS from './axios'
 export class Employee {
   static create(payload) {
   	payload.credential_attributes.credential_type = payload.credential_attributes.credential_type.key
-    return AXIOS.post('/employees', { employee: payload });
+    return AXIOS.post('v1/employees', { employee: payload });
   }
 
   static fetchEmployees() {
-    return AXIOS.get('/employees')
+    return AXIOS.get('v1/employees')
   }
 }

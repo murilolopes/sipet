@@ -67,7 +67,7 @@ export default {
               </div>
             </div>
             <div class="table-responsive mb-0">
-              <b-table :items="consultations" :fields="fields" responsive="sm" :per-page="perPage" :current-page="currentPage"></b-table>
+              <b-table :items="employees" :fields="fields" responsive="sm" :per-page="perPage" :current-page="currentPage"></b-table>
             </div>
             <div class="row">
               <div class="col">

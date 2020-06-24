@@ -12,10 +12,10 @@ export class Consultation {
   		establishment_id: payload.establishment_id,
   		consultations_service_attributes: payload.services
   	}
-    return AXIOS.post('/consultations', consultation);
+    return AXIOS.post('v1/consultations', consultation);
   }
 
   static fetchConsultations() {
-    return AXIOS.get('/consultations')
+    return AXIOS.get('v1/consultations')
   }
 }

@@ -50,6 +50,7 @@ export const consultationMethods = mapActions('consultation', [
 
 export const employeeMethods = mapActions('employee', [
   'createEmployee',
+  'fetchEmployees',
 ])
 
 export const consultationGetters = mapGetters('consultation', [
