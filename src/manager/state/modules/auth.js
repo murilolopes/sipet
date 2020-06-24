@@ -52,6 +52,24 @@ export const actions = {
     return Auth.getInvitationResource(invitation_token)
   },
 
+  acceptInvitation({ dispatch }, { employee, invitation_token }) {
+    const accept_invitation = { 
+      email: 'muriloangelo10@gmail.com', 
+      password: employee.credential_attributes.password, 
+      password_confirmation: employee.credential_attributes.password_confirmation, 
+      invitation_token: invitation_token, 
+      person_attributes: { 
+        name: employee.name, 
+        cpf: employee.cpf, 
+        phone: employee.phone, 
+        birthdate: employee.birthdate, 
+        crmv: employee.crmv, 
+        crmv_uf: employee.crmv_uf 
+      }
+    }
+    return Auth.acceptInvitation({ accept_invitation })
+  },
+
   logOut({ commit }) {
     commit('SET_CURRENT_USER', null)
   },

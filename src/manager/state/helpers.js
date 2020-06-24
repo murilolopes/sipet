@@ -25,6 +25,7 @@ export const authMethods = mapActions('auth', [
   'passwordUpdate',
   'resetPassword',
   'getInvitationResource',
+  'acceptInvitation',
 ])
 
 export const personMethods = mapActions('person', [

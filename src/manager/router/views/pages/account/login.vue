@@ -2,6 +2,7 @@
 import Layout from '@manager-layouts/default'
 import { authMethods } from '@manager-state/helpers'
 import appConfig from '@manager-src/app.config'
+import InputText from "@components/inputs/text";
 
 export default {
 	page: {

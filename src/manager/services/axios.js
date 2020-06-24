@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from './../state/store'
 
 const AXIOS = axios.create({
-  baseURL: 'http://localhost:3000/api/v1',
+  baseURL: 'http://localhost:3000/api/',
   // baseURL: 'https://pety-api.herokuapp.com/api/v1',
   timeout: 30000
 });
