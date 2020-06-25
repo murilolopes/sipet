@@ -24,4 +24,15 @@ export class Auth {
   static acceptInvitation({ accept_invitation }) {
     return AXIOS.put('/credential/invitation/', { api_credential: accept_invitation });
   }
+
+  static invite({ invitation }) {
+    const body = {
+      email: invitation.email,
+      credential_type: invitation.credential_type.key,
+      person_attributes: {
+        name: invitation.name
+      }
+    }
+    return AXIOS.post('/credential/invitation/', { api_credential: body });
+  }
 }

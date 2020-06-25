@@ -52,6 +52,10 @@ export const actions = {
     return Auth.getInvitationResource(invitation_token)
   },
 
+  sendInvitation({ dispatch }, invitation) {
+    return Auth.invite(invitation)
+  },
+
   acceptInvitation({ dispatch }, { employee, invitation_token }) {
     const accept_invitation = { 
       email: 'muriloangelo10@gmail.com', 

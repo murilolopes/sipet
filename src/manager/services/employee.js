@@ -2,7 +2,7 @@ import AXIOS from './axios'
 
 export class Employee {
   static create(payload) {
-  	payload.credential_attributes.credential_type = payload.credential_attributes.credential_type.key
+  	payload.credential_type = payload.credential_type.key
     return AXIOS.post('v1/employees', { employee: payload });
   }
 

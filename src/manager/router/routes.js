@@ -146,7 +146,7 @@ const entriesRoutes = [
     },
     children: [
       {
-        name: 'Convidar Funcionário',
+        name: 'Novo Funcionário',
         path: 'funcionarios/criar',
         meta: { authRequired: true },
         component: () => 

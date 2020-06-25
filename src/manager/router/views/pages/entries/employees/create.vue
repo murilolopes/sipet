@@ -11,13 +11,13 @@ import InputText from "@components/inputs/text";
 
 export default {
   page: {
-    title: 'Cadastro de funcionários',
+    title: 'Novo funcionário',
     meta: [{ name: 'description', content: appConfig.description }],
   },
   components: { Layout, PageHeader, Multiselect, InputText },
   data() {
     return {
-      title: 'Cadastrar de funcionário',
+      title: 'Novo funcionário',
       items: [
         {
           text: 'Dasboard',
@@ -48,9 +48,13 @@ export default {
   },
   methods: {
     ...employeeMethods,
+    ...authMethods,
     handleSubmit() {
       this.$v.employee.$touch()
-      if (!this.$v.employee.$invalid) this.createEmployee(this.employee)
+      Swal.fire({title: 'Enviando...'})
+      Swal.showLoading()
+      if (!this.$v.employee.$invalid) 
+        this.sendInvitation({invitation: this.employee}).then(() => Swal.close())
     }
   },
   validations: {
@@ -105,7 +109,7 @@ export default {
               <div class="row">
                 <div class="col-12 text-right">
                   <b-button slot="next" variant="outline-primary" type="submit"> 
-                    Cadastrar
+                    Enviar
                   </b-button>
                 </div>
               </div>
