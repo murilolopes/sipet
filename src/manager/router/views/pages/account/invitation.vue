@@ -80,6 +80,7 @@ export default {
         'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
       ],
       invitation_token: '',
+      isVet: false,
       employee: {
         name: '',
         cpf: '',
@@ -127,7 +128,9 @@ export default {
   },
 	mounted(){
 		this.invitation_token = this.$route.query.invitation_token
-		this.getInvitationResource(this.invitation_token);
+		this.getInvitationResource(this.invitation_token).then(res => {
+			if (res.data.credential.credential_type == 'vet') this.isVet = true
+		});
 		
 	},
 	computed: {},
@@ -222,7 +225,7 @@ export default {
 								          />
 								        </div>
 								        
-								        <div class="col-12 col-md-6">
+								        <div class="col-12 col-md-6" v-if="isVet">
 								          <InputText
 								            v-model="$v.employee.crmv.$model"
 								            label="CRMV"
@@ -232,7 +235,7 @@ export default {
 								          />
 								        </div>
 								        
-								        <div class="col-6 col-md-6">
+								        <div class="col-6 col-md-6" v-if="isVet">
 		                      <b-form-group>
 		                        <label> UF <span class="text-danger">*</span> </label>
 		                        <multiselect v-model="employee.crmv_uf" :options="states" 
