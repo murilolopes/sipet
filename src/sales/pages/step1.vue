@@ -64,13 +64,13 @@ export default {
         email: { 
           required, 
           email,
-          async isUnique(value) {
-            if (value === '' || !this.$v.client.credential_attributes.email.email) return true
-            if (this.$v.client.credential_attributes.email.email) {
-              const response = await this.$api.post('clients/by_email', { 'email': value })
-              return !response.data
-            }
-          }
+          // async isUnique(value) {
+          //   if (value === '' || !this.$v.client.credential_attributes.email.email) return true
+          //   if (this.$v.client.credential_attributes.email.email) {
+          //     const response = await this.$api.post('clients/by_email', { 'email': value })
+          //     return !response.data
+          //   }
+          // }
         },
         password: { required, minLength: minLength(8) },
         password_confirmation: { required, minLength: minLength(8), sameAsPassword: sameAs('password') },
@@ -80,14 +80,14 @@ export default {
         required,
         cpf,
         minLength: minLength(14),
-        async isUnique(value) {
-          if (value === '' || !this.$v.client.cpf.cpf) return true
+        // async isUnique(value) {
+        //   if (value === '' || !this.$v.client.cpf.cpf) return true
 
-          if (this.$v.client.cpf.cpf) {
-            const response = await this.$api.post('clients/by_cpf', { cpf: value })
-            return !response.data
-          }
-        }
+        //   if (this.$v.client.cpf.cpf) {
+        //     const response = await this.$api.post('clients/by_cpf', { cpf: value })
+        //     return !response.data
+        //   }
+        // }
       },
       birthdate: { 
         required, 
@@ -146,7 +146,7 @@ export default {
             <div v-if="$v.client.credential_attributes.email.$error" class="invalid-feedback">
               <span v-if="!$v.client.credential_attributes.email.required">Este campo é obrigatório.</span>
               <span v-if="!$v.client.credential_attributes.email.email">Email inválido.</span>
-              <span v-if="!$v.client.credential_attributes.email.isUnique">Email já esta em uso.</span>
+              <!-- <span v-if="!$v.client.credential_attributes.email.isUnique">Email já esta em uso.</span> -->
             </div>
           </b-form-group>
         </div>
@@ -207,7 +207,7 @@ export default {
             <div v-if="$v.client.cpf.$error" class="invalid-feedback">
               <span v-if="!$v.client.cpf.required || !$v.client.cpf.minLength">Este campo é obrigatório.</span>
               <span v-if="!$v.client.cpf.cpf">CPF inválido.</span>
-              <span v-if="!$v.client.cpf.isUnique">CPF já esta em uso.</span>
+              <!-- <span v-if="!$v.client.cpf.isUnique">CPF já esta em uso.</span> -->
 
             </div>
           </b-form-group>

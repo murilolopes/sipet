@@ -130,20 +130,18 @@ export default {
 				})
 				.then(response => (this.cardId = response.id));
 
-			this.finalModel.client.cpf = this.finalModel.client.cpf
-				.replace("-", "")
-				.replace(".", "")
-				.replace(".", "");
+			this.finalModel.client.cpf
 			let client = {
 				client: {
 					...this.finalModel.client,
+					...this.finalModel.client.credential_attributes,
 					pets_attributes: this.finalModel.pets
 				},
 				card: this.cardId
 			};
 
 			this.$api
-				.post("/clients", client)
+				.post("sipet/newPlan", client)
 				.then(response => {
 					this.showWelcome = true;
 					window.Swal.fire(

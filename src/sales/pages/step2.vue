@@ -56,8 +56,8 @@ export default {
     }
   }, 
   mounted() {
-    this.$api.get('pets_breeds').then(resp => this.breeds = resp.data )
-    this.$api.get('categories').then(resp => this.categories = resp.data )
+    this.$api.get('sipet/pets_breeds').then(resp => this.breeds = resp.data )
+    this.$api.get('sipet/categories').then(resp => this.categories = resp.data )
   },
   computed: {
     filtered_breeds() {
